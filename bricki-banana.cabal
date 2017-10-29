@@ -1,0 +1,88 @@
+name:                 bricki-banana
+version:              0.1.0.0
+-- synopsis:            
+-- description:         
+license:              BSD3
+license-file:         LICENSE
+author:               Lennart Spitzner
+maintainer:           hexagoxel@hexagoxel.de
+-- copyright:           
+category:             Graphics
+build-type:           Simple
+extra-source-files:   ChangeLog.md
+cabal-version:        >=1.10
+
+Flag demos
+    Description:      Build demonstration programs
+    Default:          False
+    manual:           True
+
+library
+  exposed-modules:      Brick.BananaMain
+  -- other-modules:       
+  -- other-extensions:    
+  build-depends:        base >=4.10 && <4.11
+                      , containers
+                      , stm
+                      , microlens >= 0.3.0.0
+                      , bricki >= 0.28.0.100 && <0.29
+                      , vty
+                      , reactive-banana
+  hs-source-dirs:       src
+  default-language:     Haskell2010
+
+executable bricki-banana-demo
+  if !flag(demos)
+    Buildable: False
+  hs-source-dirs:       programs
+  ghc-options:          -threaded -Wall
+  default-extensions:   LambdaCase
+  default-language:     Haskell2010
+  main-is:              BananaDemo.hs
+  build-depends:        base <= 5
+                      , bricki
+                      , bricki-banana
+                      , vty >= 5.5.0
+                      , data-default
+                      , text
+                      , microlens
+                      , reactive-banana
+                      , containers
+
+executable bricki-banana-custom-event-demo
+  if !flag(demos)
+    Buildable: False
+  hs-source-dirs:       programs
+  ghc-options:          -threaded -Wall
+  default-extensions:   LambdaCase
+  default-language:     Haskell2010
+  main-is:              CustomEventDemo.hs
+  build-depends:        base <= 5
+                      , bricki
+                      , bricki-banana
+                      , vty >= 5.5.0
+                      , data-default
+                      , text
+                      , microlens >= 0.3.0.0
+                      , microlens-th
+                      , reactive-banana
+                      , containers
+
+executable bricki-banana-suspend-resume-demo
+  if !flag(demos)
+    Buildable: False
+  hs-source-dirs:       programs
+  ghc-options:          -threaded -Wall
+  default-extensions:   LambdaCase
+  default-language:     Haskell2010
+  main-is:              SuspendAndResumeDemo.hs
+  build-depends:        base <= 5
+                      , bricki
+                      , bricki-banana
+                      , vty >= 5.5.0
+                      , data-default
+                      , text
+                      , microlens >= 0.3.0.0
+                      , microlens-th
+                      , reactive-banana
+                      , containers
